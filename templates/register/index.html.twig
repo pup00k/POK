@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}POK | Acceuil{% endblock %}
+
+{% block content %}
+<center>
+<div class="pageRegister" >
+
+<h1> Rejoins la communauté </h1>
+        </center>
+
+        <center>
+        <div class="register">
+                {{form_start(form)}}
+
+                        {{ form_row(form.email, {'attr' : {'class': 'form-control'}})}}
+                        {{ form_row(form.password, {'attr' : {'class': 'form-control'}})}}
+                        {{ form_row(form.pseudo, {'attr' : {'class': 'form-control'}})}}
+                        {{ form_row(form.photo, {'attr' : {'class': ''}})}}
+                        {{ form_row(form.roleArtiste, {'attr' : {'class': ''}})}}
+                        {{ form_row(form.roleUser, {'attr' : {'class': ''}})}}
+                        {{ form_row(form.cgu, {'attr' : {'class': ''}})}}
+                        {{ form_row(form.Valider, {'attr' : {'class': 'btn btn-primary'}})}}
+
+
+
+
+                {{ form_end(form) }}
+                        {# <figure class="cercleNoir"> <img src="{{ asset('img/photoRegister.jpg' )}}" alt="imagepoursinscrireMusique"></figure> #}
+
+                        <span class="verticalLigne"></span> 
+                            
+                </div>
+                
+        </center>
+       
+</div>
+
+
+{% endblock %}

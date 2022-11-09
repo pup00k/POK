@@ -1,0 +1,37 @@
+.pageRegister{
+    padding: 2rem;
+}
+
+.pageRegister h1{
+    padding: 1rem;
+}
+
+.register{
+    display: flex;
+    gap: 10%;
+}
+
+.register form{
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    z-index: 1;
+
+}
+
+.cercleNoir img{
+    z-index: 0;
+    height: 800px;
+    width: 80%;
+    /* position: absolute; */
+    /* top: 200px; */
+
+}
+.verticalLigne{
+    border-left: 1px solid rgb(58, 58, 58);
+        display: inline-block;
+        margin: 0 20px;
+        margin-bottom: 20px;
+      }
+

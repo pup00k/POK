@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CheckoutController!{% endblock %}
+
+{% block content %}
+
+    
+
+{% for panier in panier %}
+    {{panier.event.name}} 
+    {{panier.event.price * panier.nb_participant}}
+{% endfor %}
+<button><a href="{{path("add_order")}}"> Valider ma commande</a> </button>
+<p>  </p>
+{% endblock %}

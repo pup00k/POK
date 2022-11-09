@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+{% block title %} {{app.user.firstname }} Modifie Ton Event {% endblock %}
+
+{% block content %}
+<div class="wrapper">
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+<hr>
+
+</div>
+<div class="example-wrapper">
+    <h1>Modifier un événement</h1>
+
+  <div class="container container-fluid">
+    <div class="row">
+      <div class="col-lg-8">
+      {{form(form) }}
+
+       {# Vérifier si la route est "event_edit" on affiche les images #}
+       {% if app.request.attributes.get('_route') == 'event_edit' %}
+       <h2>Images</h2>
+       {% for event in events %}
+            {% if event.photo| length > 0 %}
+              <td><img src="{{ asset('img/' ~ event.photo)}}" width="150" height="150" alt></td>
+              
+        <div>
+         
+       {% endif %}
+       
+       {% endfor %} 
+        {% for image in event %}
+          <a href="{{path('event_delete_image',{id: image.id}) }}" data-delete data-token="{{csrf_token('delete'~ image.id)}}">Supprimer</a>        
+      {% endfor %}
+         {% endif %}
+        
+      </div>
+      </div>
+      </div>
+
+
+{% endblock %}
+
+{% block javascripts %}
+
+<script src ="{{ asset('js/images.js')}}"> </script>
+</div>
+{% endblock %}

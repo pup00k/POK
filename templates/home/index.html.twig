@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}POK | Acceuil{% endblock %}
+
+{% block video %}
+<div class="containerHomeCover" id="videoContainer"style="--ratio:3;">
+    <video id="videoHome" alt="VideoCoverMusic" aria-hidden="true" preload="auto" autoplay loop muted width="100%">
+        <source type="video/mp4" src="{{ asset('img/videoHome.mp4') }}">   
+    </video>
+    <button id="lecteur">II</button>
+
+{% if app.user %}{% else %}
+    <div class="choiceCover">
+            <h2><a href="{{path('inscription')}}"> Je suis un artiste</a></h2>
+            <h2><a href="{{path('inscription')}}"> Je suis un mélomane</a></h2>
+    </div>
+{% endif %}
+
+    <div class="detailCover"> 
+        <h1> Découvre ou fais découvrir la musique qui te donne envie.</h1> 
+        <p> Sur POK, tu pourras posté ou reserver un concert ou un événement de ton choix, que t'aimerais decouvrir ou partager avec tes ami(e)s, qui partagent les mêmes gouts musicaux que toi !  
+    </div>
+</div>
+{% endblock %}
+
+{% block content %}
+
+    <h2 id="homeh2">FAIS TOI CONNAITRE ET PARTAGE TES EVENEMENTS SUR POK </h2>
+
+    <div class="firstSection" id="page-1" >
+        <article>
+            <figure> 
+            <img src="{{asset('img/visibilite.jpeg')}}"/>
+                                <h3> Gagne en visibilité </h3>
+             <p> Grâce a POK tu peux gagner en visibilite en partageant ton évènement</p> 
+            </figure> 
+        </article>
+        <article> 
+            <figure>
+
+            <img src="{{asset('img/contact.webp')}}"/>
+                              <h3> Développe tes contacts</h3>
+            <p> Construit ton entourage et créer des contacts pour construire ton empire musical</p>
+            </figure> 
+        </article>
+         <article> 
+            <figure>
+
+            <img src="{{asset('img/decouvre.jpeg')}}"/>
+                               <h3> Arbore un nouveau genre Musical</h3> 
+            <p>Découvre des nouveau artiste, et de nouveau genre dans la musique.</p>
+            </figure> 
+        </article>
+    </div>
+    
+        <h4> COMMENT FAIRE ?</h4>
+   <div class="secondSection">
+    <article>
+        <p> Sur POK, il vous suffit de créer un compte Mélomane ou artiste, OU bien même les deux, après votre inscription vous aurez la possibilité en fonction de votre rôle de choisir de posté un évènement ou d'en reserver un pour voir vos artistes préfèrer ou en découvrir avec vos ami(e)s. </p>
+        <img src="{{asset('img/secondsection.jpg')}}" alt="imageMusicMicro">
+        
+        <a class="btn2" href="{{path('event')}}">Trouve un évènement</a>
+
+    </article>
+    </div> 
+
+{% endblock %}
+
+{% block javascript %}
+<script src="https://kit.fontawesome.com/3f1f47ed70.js" crossorigin="anonymous"></script>
+ <script src="{{asset('js/script.js') }}"></script>
+{% endblock %} 
+
+

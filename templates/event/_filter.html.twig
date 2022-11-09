@@ -1,0 +1,22 @@
+
+
+
+
+{{form_start(form, {attr: {class: 'filter'}})}}
+{{ form_row(form.q)}}
+<h4>Categories</h4>
+{{form_row(form.categories)}}
+
+<h4> Date </h4>
+ A partir du {{form_row(form.dateStart)}}
+<h4> Prix </h4>
+    <div>
+    {{form_row(form.min)}} 
+    </div>
+    <div>
+    {{form_row(form.max)}} 
+    </div>
+
+
+
+{{form_end(form)}}

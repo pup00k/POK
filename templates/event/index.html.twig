@@ -1,0 +1,82 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} POK | Evenements{% endblock %}
+
+
+
+
+{% block content %}
+<div class="sideMargin">
+<h1> Evenements à venir </h1>
+
+<div class="event">
+ <div class="event1">
+<table>
+    <thead>
+        <tr>
+            <th><h2> Filtre</h2></th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td> {% include "event/_filter.html.twig" with {form: form} only %} </td>
+        </tr>
+    </tbody>
+</table>
+</div>                                                               
+ <div class="event1">
+ <table>
+    <thead>
+        <tr>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+            {% for event in events %}
+            
+            <tr class="event-item">
+                {% if event.photo | length > 0 %}
+                <td><img src="{{ asset('img/' ~ event.photo )}}" width="150" height="150" alt></td>
+                {% endif %}
+                <td><a href="{{path('show_event', {'id': event.id})}}"> {{event.name}} </a><br></td>
+                <td>  {{ event.dateStart| date('d-m-Y') }} {{event.dateEnd | date('d-m-Y')}}  </td> 
+                <td> {{event.price}} € </td>
+                {% if is_granted('ROLE_ARTISTE') %}
+                {% if app.user.id == event.artist.id %}
+                <td><a href="{{ path('delete_event',{'id': event.id}) }}">Supprimer</a></td>
+                <td><a href="{{ path('event_edit',{'id': event.id}) }}">Modifier</a></td>
+                
+                {% else %}
+                <td> </td>
+
+                <td> </td>
+                {% endif %}
+                
+                {% endif %}
+                {# <td><a href="{{ path('cart_add',{'id': event.id}) }}">Reserver</a></td> #}
+             </tr>
+                
+            
+        {% endfor %}
+        
+
+         {# {% for c in event.categorie_event %}
+            <em> {{c.name_category}}</em>
+        {% endfor %}  #}
+    </tbody>
+</table>
+{{knp_pagination_render(events)}}
+</div>
+</div>
+
+</div>
+{% endblock %}
+
+  

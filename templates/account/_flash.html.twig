@@ -1,0 +1,14 @@
+{% for label, messages in app.flashs %}
+        {% for message in messages %}
+            
+     {% if app.user and app.user.isVerified == false %}
+    
+    <div role ="alert">
+        <button type="button" > {{message|raw}} </button>
+    </div>
+
+    {% endif %}
+
+        {% endfor %}
+
+{% endfor %}

@@ -1,19 +1,201 @@
-<!DOCTYPE html>
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+        <title>{% block title %}{% endblock %}</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">        
+        <meta name="Description" content="POK site pour découvrir plusieurs évènement et artists autour de la musique">
+        <meta name="language" content="fr">
         {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
-        {% block stylesheets %}
-            {{ encore_entry_link_tags('app') }}
-        {% endblock %}
+       
+            <!-- CSS only -->
+        <link rel="stylesheet" href="{{asset('css/basestyle.css')}}">
+        <link rel="stylesheet"  href="{{asset('css/responsive.css')}}" >
+        <link rel="stylesheet"  href="{{asset('css/event.css')}}" >
+        <link rel="stylesheet"  href="{{asset('css/home.css')}}" >
+        <link rel="stylesheet"  href="{{asset('css/register.css')}}" >
+        <link rel="shortcut icon" href="{{asset('favicon/favicon.ico') }}" type="image/x-icon" />
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
+        <link rel="stylesheet" href="{{asset('css/user.css')}}">
+        <script src="https://kit.fontawesome.com/f96708f8ed.js" crossorigin="anonymous"></script>
+            {% block stylesheets %}{% endblock %}
 
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
+            <!-- JavaScript Bundle with Popper -->
+        
+        <script src="/tarteaucitron/tarteaucitron.js"></script>
+        <script type="text/javascript">
+            var tarteaucitronForceLanguage = "fr";
+        </script>
+        <script type="text/javascript">
+            tarteaucitron.init({
+                "privacyUrl": "confidentialite",
+                /* URL page mentions */
+                "hashtag": "#tarteaucitron",
+                /* Ouvrir le panneau du hashtag */
+                "cookieName": "tarteaucitron",
+                /* Nom du cookie */
+                "orientation": "middle",
+                /* Position banniere (top - bottom) */
+                "groupServices": false,
+                /* Groupe les services par categories */
+                "showAlertSmall": false,
+                /* Petite alerte en bas a droite */
+                "cookieslist": false,
+                /* Montre la liste des cookies */
+                "closePopup": false,
+                /* Fermer le popup */
+                "showIcon": true,
+                /* Montrer l'icone cookie */
+                //"iconSrc": "", /* Optionnal: URL or base64 encoded image */
+                "iconPosition": "BottomLeft",
+                /* BottomRight, BottomLeft, TopRight and TopLeft */
+                "adblocker": false,
+                /* Detecte AD block */
+                "DenyAllCta": true,
+                /* Montre le bouton refuser tout */
+                "AcceptAllCta": true,
+                /* Montre accepter tout */
+                "highPrivacy": true,
+                /* Desactive le contenu automatique */
+                "handleBrowserDNTRequest": false,
+                /* If Do Not Track == 1, disallow all */
+                "removeCredit": true,
+                /* Retire le lien vers tarteaucitron */
+                "moreInfoLink": true,
+                /* Lien Plus d'infos */
+                "useExternalCss": false,
+                /* Si faut le CSS externe sera charger */
+                "useExternalJs": false,
+                /* Si faut le JS externe sera charger */
+                //"cookieDomain": ".my-multisite-domaine.fr", /* Partage les cookies sur un multidomaine */
+                "readmoreLink": "",
+                /* Changer le lien "lire plus"*/
+                "mandatory": true,
+                /* Montre un message a propose des cookies "mandatory" */
+            });
+            tarteaucitron.services.mycustomservice = {
+                "key": "mycustomservice",
+                "type": "ads|analytic|api|comment|other|social|support|video",
+                "name": "MyCustomService",
+                "needConsent": true,
+                "cookies": ['cookie', 'cookie2'],
+                "readmoreLink": "/custom_read_more", // If you want to change readmore link
+                "js": function () {
+                    "use strict";
+                    // When user allow cookie
+                },
+                "fallback": function () {
+                    "use strict";
+                    // when use deny cookie
+
+                }
+                
+            };
+        </script>
+
+        <script type="text/javascript">
+            tarteaucitron.user.gajsUa = 'UA-XXXXXXXX-X';
+            tarteaucitron.user.gajsMore = function () { /* add here your optionnal _ga.push() */ };
+            (tarteaucitron.job = tarteaucitron.job || []).push('gajs');
+            </script>
+
     </head>
+    
     <body>
-        {% block body %}{% endblock %}
-    </body>
+        <div class="wrapper">
+           <header class="flex"> 
+             
+            <nav id="menu" class="" role="navigation">
+                <div  >
+                <ul class="navUl">
+                    <div class="navLeft">
+                        <li class=""><a class="account" href="{{ path('home')}}">COMMENT FAIRE ?</a></li>
+                        <li class=""><a class="account" href="{{ path('event')}}">EVENEMENT</a></li>
+                    </div>
+                    <a id="logo" class="pok" href="{{ path('home')}}">POK</a>  
+                    <div class="monCompte">
+            {% if app.user %}
+                    <li class=""><a href="{{path('account')}}">Mon compte</a></li> <p>|</p> <li class=""><a href="{{path('app_logout')}}">Déconnexion</a></li>
+
+            {% else %}
+                    <li class=""><a href="{{path('inscription')}}">Inscription</a></li> <p>|</p> <li class=""><a href="{{path('app_login')}}">Connexion</a></li>
+            {% endif %}       
+            {% if app.user %} 
+                    <li class=""><a href="{{path('cart_index')}}">{{app.session.get("panier")|length}}<i class="fa-solid fa-cart-shopping"></i></a></li>
+            {% endif %}
+                    </div>
+                    </ul>
+                    
+            </nav>
+    </header>
+    <figure id="banner" style="margin : 0rem 0rem 0rem;">
+    <a id="burger">
+        <span class="fas fa-bars fa-2x"></span>
+    </a>
+    <div class="backgroundG">
+    <main class="main-content" role="main">  
+        {% if app.user and app.user.isVerified == false %}
+        <div role ="alert">
+            <h6 class="alert" type="button" > Votre compte n'est Pas verifier  <i class="fa-solid fa-ghost"></i></h6> 
+        </div>
+
+        {% endif %}
+        {% block video %}
+        {% endblock %}
+    </figure>
+        <div class="sideMargin"> {% block content %}{% endblock %} </div>
+                                {% block javascript %}{% endblock %}
+
+    </main>
+    </div>
+    
+    <footer>
+        <div class="sectionFooter">
+            <ul>
+                <h5>RESEAU</h5>
+                <ul>
+                    <li>
+                        <a href="#"><i class="fa-brands fa-facebook"></i></a>
+                        <a href="#"><i class="fa-brands fa-instagram"></i></a>
+                        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+                    </li>
+                </ul>
+            </ul>
+            <ul>
+                <h5>CONTACTEZ NOUS</h5>
+                <li> <a href="{{path('contact')}}">Contact</a></li>
+            </ul>
+            <ul>
+                <h5>EXPLORER</h5>
+                <li>
+                    <a href="{{path('home')}}">Acceuil</a>
+                </li>
+                <li>
+                    <a href="#">A propos</a>
+                </li>
+            </ul>
+        </div>
+        <hr style="color :aliceblue">
+        <div class="rules">
+
+
+                <ul class="footerDetails">
+                    <li>
+                        <a href="#">CGS</a>
+                        <a href="{{path('confidentialite')}}">Confidentialité | Données personnelles </a>
+                        <a href="#">Mentions Légales</a>
+                        <a href="{{path('cookie')}}">Cookies</a>
+                    </li>
+                </ul>
+
+            </div>
+        </footer>
+
+   
+        
+        </div>
+    </div>
+</body>
+
 </html>
+

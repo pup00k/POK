@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} POK | Evenemnt{% endblock %}
+
+{% block content %}
+
+<a href="{{ path('event')}}"> < Retour </a>
+
+
+          <section class="viewEvent">
+          
+            {% if event.photo is null %}
+            <img class="imgEvent"src="{{ asset('img/imgShowEvent.jpeg' )}}" width="150" height="150" alt>
+            {% else %}
+          <img class="imgEvent"src="{{ asset('img/' ~ event.photo )}}" width="150" height="150" alt>
+               {% endif %} 
+          <div class="infoEvent">
+               <h1> Evenement {{event.name}} </h1> 
+               <small>{{event.cpLocation}} {{event.cityLocation}} {{event.nameLocation}} <br> </small>
+               <p style="color: grey ;"> Commence le {{ event.dateStart| date('d-m-Y H:i') }} finis le {{event.dateEnd | date('d-m-Y H:i')}} <br></p>
+           <p> Par {{event.artist.pseudo}}</p>
+            <a href="{{ path('account_search',{'id': app.user.id}) }}"> <img class="imgArtist"src="{{ asset('img/' ~ event.artist.photo )}}" width="150" height="150" alt></a>
+            
+
+              
+          <br>
+          
+
+                
+             <div class="buttonReserve"> <p >  <p>A partir de</p> <p>{{event.price}} € </p></div>
+         {{form(cartForm)}}
+
+               <article> {{event.description}} </article>
+          </div> 
+          
+          </section>
+               
+          <div class="sectionComment">
+               <h2> Liste des commentaires</h2>
+               {% for comment in event.comments %}
+               {% if comment.user.pseudo is null %}
+               <p> Anonyme le {{comment.dateCreate | date("d-m-Y H:i")}}</p> 
+                <div> {{comment.text| raw}}</div>
+                {% else %}
+                <p> Publié par {{comment.user.pseudo}} le {{comment.dateCreate | date("d-m-Y H:i")}}</p> 
+                <div> {{comment.text| raw}}</div>
+
+                  {# <p><a href="#" data-reply>  SYSTEME DE REPLIS VOIR VIDEO NOUVELLE TECHNO  38MIN19 #}
+                    {% endif %}
+                    <a href="{{path('deleteComment', {'id': comment.id})}}"><i class="fa-solid fa-trash"></i></a>
+
+               {% endfor %}
+               
+          </div>
+          <div id="ajout-commentaire"> 
+          <h2> Ajouter un commentaire </h2>
+          {{form(commentForm)}}
+          
+           </div>
+        
+
+{% endblock %}

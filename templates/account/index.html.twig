@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte - POK{% endblock %}
+
+{% block content %}
+<div class="container">
+
+   
+
+
+<div class="headerProfil">
+        <div class="backgroundLinear"></div>
+        {% if app.user.photoBackground is null %}
+
+        {% else %}
+        <img class="photoBack"src="{{ asset('img/' ~ app.user.photoBackground ) }}">
+        {% endif %}
+        
+        {% if app.user.photo is null %}
+        <figure class="photoProfil">
+                 <img  src="{{ asset('img/profilUser.png')}}" width="150" height="150" alt>
+        
+        {% else %}
+        <figure class="photoProfil">
+        <img  src="{{ asset('img/' ~ app.user.photo)}}" width="150" height="150" alt>
+         
+        {% endif %}
+                <figcaption>{{app.user.pseudo}}  
+                {% if is_granted('ROLE_ARTISTE') %}
+                <i class="fa-sharp fa-solid fa-certificate"></i>  
+                {% endif %}
+        </figcaption>
+        </figure>
+        </figure>
+</div>
+<br>
+    <hr>
+        <a href="{{path('change_password')}}">>Modifier votre mot de passe</a><br>
+{% if is_granted('ROLE_ARTISTE') %}
+        <a href="{{path('add_event')}}">>Ajouter un événement</a><br>
+{% endif %}
+
+        <a href="{{ path('user_edit',{'id': app.user.id}) }}">>Modifier votre compte</a><br>
+        <a href="{{ path('user_data',{'id': app.user.id}) }}">Voir mes données personnelles (RGPD)</a><br>
+
+<hr>
+{% if is_granted('ROLE_ARTISTE') %}
+        <h3> Musique de l'artiste : </h3>
+
+     {# {% include "account/partials/add_listen_music.html.twig" %} #}
+
+     <h3> Evenements de l'artiste: </h3>
+     <div class="eventArtist">
+     {% for event in app.user.events %}
+     <div class="card" style="width: 100%;">
+
+        
+       
+        <div class="card-body">
+            <img src="{{ asset('img/' ~ event.photo )}}" width="150" height="150" alt="imageEvent">
+          <h5 class="card-title"> <a href="{{path('show_event', {'id': event.id})}}"> {{event.name}} </a><br></h5>
+          <p class="card-text"><p>{{ event.dateStart| date('d-m-Y') }} {{event.dateEnd | date('d-m-Y')}} 
+            {{event.price}} €</p>
+          {# <a href="#" class="btn btn-secondary"> #}
+            
+            {% if is_granted('ROLE_ARTISTE') %}
+            {% if app.user.id == event.artist.id %}
+            <a href="{{ path('delete_event',{'id': event.id}) }}">Supprimer</a>
+            <a href="{{ path('event_edit',{'id': event.id}) }}">Modifier</a>
+            
+             {% endif %}
+             
+            {% endif %}</a>
+        </div>
+      </div>
+      <br><br>
+      {% endfor %}
+        </div>
+      {% endif %}
+</div>
+{% endblock %}

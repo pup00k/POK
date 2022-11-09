@@ -1,0 +1,96 @@
+{% extends 'profile.html.twig' %}
+{% block title %}Hello Employer!{% endblock %}
+{% block body %}
+
+    <main id="main">
+        <div id="main-left">
+            <div class="right">
+                <section>
+                    <header>
+                        <div class="top">
+                            <p>{{ 'Tasks'|trans }}</p>
+                        </div>
+                        <div class="bottom">
+                            <form class="form-range">
+                                <div class="daterange">
+                                    <span></span>
+                                </div>
+                            </form>
+                        </div>
+                    </header>
+                    {% include 'partials/_message.html.twig' %}
+                    <article class="content">
+                        <div class="button-top">
+                            <a class="bt-blue3 task-active" href="#">{{ 'Tasks in progress'|trans }}</a>
+                            <a class="bt-blue3 task-done" href="#">{{ 'Tasks done'|trans }}</a>
+                            <a class="bt-blue3" href="{{ path('app_logout') }}">{{ 'Logout'|trans }}</a>
+                        </div>
+                        {% include 'employer/partials/_task_list.html.twig' %}
+                    </article>
+                </section>
+            </div>
+            <div class="left">
+                {% for task in tasks %}
+                    <section class="task-item" id="task-{{ task.id }}" {% if loop.first %}{% else %}hidden{% endif %}>
+                        <header>
+                            <div class="top">
+                                <p>{{ 'Claud account'|trans }}</p>
+                            </div>
+                            <div class="bottom">
+                                <div class="button-top">
+                                    <a class="bt-blue3 link-dialog ajax-popup-link" data-dialog="add-employee" href="{{ path('app_task_note', { task: task.id}) }}">
+                                        {{ 'Add note'|trans }}
+                                    </a>
+                                    <a class="bt-blue3 ajax-popup-link" href="{{ path('app_task_photo', { task: task.id}) }}">{{ 'Add photo'|trans }}</a>
+                                    {#
+                                        @TODO: implement buttons
+                                    #}
+                                    {#
+                                    <a class="bt-blue3" href="#">{{ 'Add alert'|trans }}</a>
+                                    <a class="bt-blue3" href="#">{{ 'Report problem'|trans }}</a>
+                                    #}
+                                </div>
+                            </div>
+                        </header>
+                        <div class=" content" >
+                            <div class="row">
+                                {% include 'employer/partials/owner_information.html.twig' %}
+                                {% if task.renter %}
+                                    {% include 'employer/partials/renter_information.html.twig' %}
+                                {% endif %}
+
+                            </div>
+                            <br /><br />
+                            <h2>{{ 'Task information'|trans }} #{{ task.id }}</h2>
+                        </div>
+                        {% include 'employer/forms/task_information.html.twig' %}
+                    </section>
+                {% endfor %}
+            </div>
+        </div>
+        <aside id="main-right">
+            <div id="calendar"></div>
+        </aside>
+        {% include 'administrator/partials/js/_calendar.html.twig' %}
+    </main>
+
+    <script>
+        const toogleLinks = document.querySelectorAll('[data-toggle]');
+        // Loop through all links
+        Array.from(toogleLinks).forEach(link => {
+            // get tooble elements
+            const elementsSelector = link.getAttribute('data-toggle')
+            const elements = document.querySelectorAll(elementsSelector);
+            // add click event
+            link.addEventListener('click', function(event) {
+                // Hide all blocks
+                Array.from(elements).forEach(item => item.setAttribute('hidden', true));
+                // Get target block
+                const target = this.getAttribute('href');
+                // Show target block
+                document.querySelector(target).removeAttribute('hidden')
+            }, false);
+        });
+    </script>
+
+{% endblock %}

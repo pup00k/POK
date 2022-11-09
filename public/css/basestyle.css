@@ -1,0 +1,240 @@
+*{
+    box-sizing: border-box;
+--bs-link-color: #8b8b8b;
+--bs-link-hover-color: #8d8d8d;
+}
+
+body{
+    margin: 0;
+    padding: 0;
+    outline: none;
+   
+}
+main{
+    width: 100%;
+}
+/* NAVBAR */
+nav{
+
+
+height: 70px;
+background: #000000;
+justify-content: center;
+
+
+}
+
+nav li{
+    list-style: none;
+    display: contents;
+}
+
+.monCompte{
+    display: flex;
+    gap: 2rem;
+}
+
+
+.navUl{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+    max-width: 1300px;
+    margin: auto;
+    gap: 15rem;
+}
+
+.navUl a{
+    color: #ffffff;
+    text-decoration: none;
+}
+
+/* LOGO POK */
+
+.pok{
+font-family: 'Inter';
+font-size: 32px;
+width: 60px;
+left: 60px;
+background: linear-gradient(180deg, #d3d2d2 0%, rgba(29, 29, 29, 0) 100%);
+-webkit-background-clip: text;
+-webkit-text-fill-color: transparent;
+}
+
+.navLeft{
+
+    display: flex;
+    gap: 50px;
+
+    
+}
+
+.backgroundG{
+    background-color: #ededed;
+}
+
+
+.sideMargin{
+width:  90%;
+margin: auto;
+}
+
+/* EVENT FILTRE  */
+
+.filter{
+
+    display: block;
+    position: sticky;
+    top: 20px;
+
+}
+.event{
+    display: flex;
+    gap: 2rem;
+    
+
+}
+
+
+.event > div:nth-of-type(2){
+    background: #D9D9D9;
+    width: 100%;
+    padding: 2rem;
+}
+.event > div:nth-of-type(1){
+    background: #D9D9D9;
+    width: 20%;
+    padding: 2rem;
+}
+
+.event-item{
+    background-color: white;
+    width: 100%;
+    padding: 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.event1 table{
+    margin: 0;
+    width: 100%;
+}
+
+.event1 td img{
+    object-fit: cover;
+}
+
+
+tbody{
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+   
+}
+
+/* VIDEO COVER  */
+#videoHome{
+    height: 550px;
+    max-width: 100%;
+    object-fit: cover;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 0;
+    position: relative;
+
+}
+
+.containerHomeCover button{
+    border: none; 
+    z-index: 1;
+    background: rgba(255, 255, 255, 0);
+    color: white;
+    position: absolute;
+    right: 20px;
+    top: 500px;
+}
+.containerHomeCover{
+    position: relative;
+    color: #fff;
+    width: 100%;
+}
+
+.choiceCover {
+    display: flex;
+    flex-direction: column;
+    top: 350px;
+    left: 100px;
+    position: absolute;
+}
+
+.choiceCover  a{
+    text-decoration: none;
+    color: #fff;
+    font-family: Georgia, serif;
+    font-size: 25px;
+    background-color: #050505;
+    gap: 2rem;
+    padding: 10px;
+    border-radius: 10px;
+}
+.choiceCover :last-child :hover  {
+
+background-color: white;
+color: black;
+
+}
+.choiceCover  h2{
+    margin-top: 1rem;
+}
+
+.detailCover{
+    position: absolute;
+    top: 100px;
+    max-width: 600px;
+    left: 100px;
+}
+/*  FIRST SECTION ACCEUIL HOME A PROPOS  */
+
+
+/* MAIN CORPS DU SITE  */
+
+
+
+
+/* FOOTER STYLE */
+
+footer{
+    background-color: #000000;
+    padding: 50px;
+    max-width: 100%;
+    height: 340px;
+}
+
+.sectionFooter{
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+    text-align: center;
+}
+
+.sectionFooter li{
+    text-decoration: none;
+}
+
+.sectionFooter h5{
+    color: rgb(221, 221, 221);
+}
+
+.footerDetails li{
+    display: flex;
+    flex-direction: column;
+}
+
+
+

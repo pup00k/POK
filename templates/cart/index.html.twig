@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Votre Panier{% endblock %}
+
+{% block content %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+<div class="example-wrapper">
+    <h1>Votre Panier</h1>
+
+    <table>
+        <thead>
+            <tr>
+
+                <th>Produit</th>
+                <th>Prix</th>
+                <th>Quantité</th>
+                <th>Total</th>
+                <th>Actions</th>
+
+            </tr>
+        </thead>
+            <tbody>
+            {% for element in panier %}
+                <tr>
+                <td>{{element.event.name}}</td>
+                <td>{{element.event.price * element.nb_participant}} €</td>
+                <td>{{element.nb_participant}}</td>
+                {# <td>{{element.total}} €</td> #}
+                {# <td> <a href="{{path("cart_add",{id: element.event.id})}}">ajouter</a></td> #}
+                <td> <a href="{{path("cart_remove",{id: element.event.id})}}">Moins</a></td>
+                <td> <a href="{{path("cart_delete",{id: element.event.id})}}">Supprimer</a></td>
+                </tr>
+            {% else %}
+            <tr>
+                <td colspan="5"> Votre panier est vide.</td>
+            </tr>
+            {% endfor %}
+        <tfoot>
+        <tr>
+        <td>Total : </td>
+        {# <td> {{total}} € </td>  #}
+        <td></td> 
+        </tr>
+        </tfoot>
+      
+        
+
+    </tbody>
+    </table>
+
+ <button><a href="{{path("checkout")}}">Valider mon panier</a> </button>
+
+
+    
+{% endblock %}
